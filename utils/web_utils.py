@@ -6,7 +6,7 @@ import csv
 import pandas as pd
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-from config import JGI_API_URL, FILES_PER_PAGE, JSON_FOLDER, REQUEST_DELAY, ALL_FILES_METADATA_PATH
+from config import JGI_API_BASE_URL, FILES_PER_PAGE, JSON_FOLDER, REQUEST_DELAY, ALL_FILES_METADATA_PATH
 
 def download_mycocosm_fungi_table(url, output_csv_file):
     """
@@ -98,7 +98,7 @@ def fetch_all_files(organism_id, header):
         while True:
             params["p"] = page  # Update page number
             print(f"Fetching page {page} for {organism_id}...")
-            response = requests.get(JGI_API_URL, params=params, headers=header)
+            response = requests.get(JGI_API_BASE_URL, params=params, headers=header)
             response.raise_for_status()
             data = response.json()
 

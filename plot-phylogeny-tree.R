@@ -34,7 +34,7 @@ tree_dir <- file.path(phyl_dir, 'iqtree_files')
 tree_file <- file.path(tree_dir, paste0(input_file, ".treefile"))
 
 septin_file <- file.path(phyl_dir, "Septins.csv")
-tax_file <- file.path(data_dir, "proteome_list_orthofinder.csv")
+tax_file <- file.path(data_dir, "proteome_list_orthofinder_v2.csv")
 tax_outgroup_file <- file.path(phyl_dir, "outgroup_phylogeny.csv")
 output_tree <- file.path(tree_dir, paste0(input_file, ".pdf"))
 output_node_tree <- file.path(tree_dir, paste0(input_file, "_nodes.pdf"))
@@ -55,7 +55,11 @@ if (is.na(rooting_branch)) {
   tree <- root(tree, outgroup = rooting_branch, resolve.root = TRUE)
 }
 
-ggtree(tree) + geom_tiplab(align=TRUE, linesize=.01)
+# According to https://alexknyshov.github.io/R/page3.html modify root branches proportionally
+tree$edge.length[which(!(tree$edge[,1] %in% tree$edge[,2]))] <- sum(tree$edge.length[which(!(tree$edge[,1] %in% tree$edge[,2]))])/2
+
+ggtree(tree) +
+  geom_tiplab()
 
 # -----------------------------
 # Load and process metadata
@@ -112,17 +116,18 @@ lifestyle_metadata <- lifestyle_metadata[,c(
   "WRF",
   "BRF",
   "mycoparasite",
+  "entoparasite",
   "plant",
   "plant_endophyte",
   "plant_mycorrhizal",
-  "plant_oppathogen",
+# "plant_oppathogen",
   "plant_pathogen",
   "animal",
   "animal_pathogen",
-  "animal_oppathogen",
-  "human_pathogen",
-  "human_oppathogen",
-  "insect_pathogen",
+# "animal_oppathogen",
+# "human_pathogen",
+# "human_oppathogen",
+# "insect_pathogen",
   "symbiont")]
 
 # Attach to tree
