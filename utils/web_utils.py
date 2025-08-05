@@ -6,7 +6,7 @@ import csv
 import pandas as pd
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-from config import JGI_API_URL, FILES_PER_PAGE, JSON_FOLDER, REQUEST_DELAY
+from config import JGI_API_URL, FILES_PER_PAGE, JSON_FOLDER, REQUEST_DELAY, ALL_FILES_METADATA_PATH
 
 def download_mycocosm_fungi_table(url, output_csv_file):
     """
@@ -227,7 +227,7 @@ def parse_and_export(organism_ids):
             })
 
         # Export to CSV
-        output_file = "all_files_metadata.csv"
+        output_file = ALL_FILES_METADATA_PATH
         with open(output_file, "w", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=[
                 "organism", "file_name", "file_id", "_id", "file_status", "md5sum",

@@ -1,5 +1,9 @@
 import os
-from config import MYCOCOSM_FUNGI_URL, PORTALS_TABLE_PATH, DATA_DIR
+from config import MYCOCOSM_FUNGI_URL, PORTALS_TABLE_PATH
 from utils.web_utils import download_mycocosm_fungi_table
 
-download_mycocosm_fungi_table(MYCOCOSM_FUNGI_URL, PORTALS_TABLE_PATH)
+# -------------------------
+# Main
+# -------------------------
+if __name__ == "__main__":
+    download_mycocosm_fungi_table(MYCOCOSM_FUNGI_URL, PORTALS_TABLE_PATH)
