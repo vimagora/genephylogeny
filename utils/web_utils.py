@@ -6,7 +6,7 @@ import csv
 import pandas as pd
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-from config import JGI_API_BASE_URL, FILES_PER_PAGE, JSON_FOLDER, REQUEST_DELAY, ALL_FILES_METADATA_PATH
+from config import JGI_API_BASE_URL, FILES_PER_PAGE, JSON_DIR, REQUEST_DELAY, ALL_FILES_METADATA_PATH
 
 def download_mycocosm_fungi_table(url, output_csv_file):
     """
@@ -89,7 +89,7 @@ def fetch_all_files(organism_id, header):
     }
 
     # Create the JSON folder if it doesn't exist
-    os.makedirs(JSON_FOLDER, exist_ok=True)
+    os.makedirs(JSON_DIR, exist_ok=True)
 
     page = 1
     total_files = 0
@@ -112,7 +112,7 @@ def fetch_all_files(organism_id, header):
             print(f"Found {len(current_files)} files on page {page} for {organism_id}.")
 
             # Save current page to a JSON file in the JSON folder
-            page_filename = os.path.join(JSON_FOLDER, f"all_files_{organism_id}_page_{page}.json")
+            page_filename = os.path.join(JSON_DIR, f"all_files_{organism_id}_page_{page}.json")
             with open(page_filename, "w") as f:
                 json.dump(data, f, indent=2)
             print(f"✅ Saved page {page} to {page_filename}")
@@ -139,14 +139,14 @@ def fetch_all_files(organism_id, header):
 def parse_and_export(organism_ids):
     found = []
     # Ensure the JSON folder exists
-    if not os.path.exists(JSON_FOLDER):
-        print(f"No {JSON_FOLDER} folder found. Please run fetch_all_files() first.")
+    if not os.path.exists(JSON_DIR):
+        print(f"No {JSON_DIR} folder found. Please run fetch_all_files() first.")
         return
 
     for organism_id in organism_ids:
-        json_files = [f for f in os.listdir(JSON_FOLDER) if f.startswith(f"all_files_{organism_id}_page_") and f.endswith(".json")]
+        json_files = [f for f in os.listdir(JSON_DIR) if f.startswith(f"all_files_{organism_id}_page_") and f.endswith(".json")]
         if not json_files:
-            print(f"No JSON files found for {organism_id} in {JSON_FOLDER}. Skipping.")
+            print(f"No JSON files found for {organism_id} in {JSON_DIR}. Skipping.")
             found.append({
                 "organism": organism_id,
                 "file_name": "NO FILES FOUND",
@@ -171,7 +171,7 @@ def parse_and_export(organism_ids):
         organism_file_count = 0
         
         for json_file in sorted(json_files):  # Sort to process pages in order
-            json_file_path = os.path.join(JSON_FOLDER, json_file)
+            json_file_path = os.path.join(JSON_DIR, json_file)
             print(f"Parsing {json_file}...")
             with open(json_file_path, "r") as f:
                 data = json.load(f)
