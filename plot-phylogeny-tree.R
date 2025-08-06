@@ -22,7 +22,7 @@ names(rooting_branches) <- outgroups
 dataset <- datasets[1]
 iteration <- iterations[3]
 trimming <- trimmings[2]
-outgroup <- outgroups[3]
+outgroup <- outgroups[4]
 rooting_branch <- rooting_branches[outgroup]
 
 
@@ -115,19 +115,19 @@ lifestyle_metadata <- lifestyle_metadata[,c(
   "saprotroph",
   "WRF",
   "BRF",
-  "mycoparasite",
-  "entoparasite",
   "plant",
   "plant_endophyte",
   "plant_mycorrhizal",
-# "plant_oppathogen",
+  #"plant_oppathogen",
   "plant_pathogen",
   "animal",
   "animal_pathogen",
-# "animal_oppathogen",
-# "human_pathogen",
-# "human_oppathogen",
-# "insect_pathogen",
+  #"animal_oppathogen",
+  #"human_pathogen",
+  #"human_oppathogen",
+  #"insect_pathogen",
+  "mycoparasite",
+  "entoparasite",
   "symbiont")]
 
 # Attach to tree
