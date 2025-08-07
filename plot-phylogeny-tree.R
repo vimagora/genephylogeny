@@ -22,7 +22,7 @@ names(rooting_branches) <- outgroups
 dataset <- datasets[1]
 iteration <- iterations[3]
 trimming <- trimmings[2]
-outgroup <- outgroups[4]
+outgroup <- outgroups[3]
 rooting_branch <- rooting_branches[outgroup]
 
 
