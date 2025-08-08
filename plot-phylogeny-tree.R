@@ -12,7 +12,7 @@ library(phytools)
 # Config paths
 # -----------------------------
 datasets <- c("OG0000195","Char_septins")
-iterations <- c("","_clean","_clean2")
+iterations <- c("","_clean","_clean2","_clean3")
 trimmings <- c("","_80trim")
 outgroups <- c("","_GtpA","_Myo2","_hMyo2")
 rooting_branches <- c("","Dicdi-GtpA","Sacce1-Myo2","Homsa-Myo2")
@@ -20,7 +20,7 @@ names(rooting_branches) <- outgroups
 
 
 dataset <- datasets[1]
-iteration <- iterations[3]
+iteration <- iterations[4]
 trimming <- trimmings[2]
 outgroup <- outgroups[3]
 rooting_branch <- rooting_branches[outgroup]
@@ -304,7 +304,8 @@ if (startsWith(input_file,"Char")){
 } else {
   if ("Sacce1-Myo2" %in% tree$tip.label) {
     highlight_nodes <- data.frame(
-      node = c(1083,1238,927,775,1350,1421,1432,1442,768,1256,1301),
+      #node = c(1083,1238,927,775,1350,1421,1432,1442,768,1256,1301),
+      node = c(1061,1208,908,759,756,1225,1271),
       type = "node")
   } else if ("Dicdi-GtpA" %in% tree$tip.label) {
     highlight_nodes <- data.frame(

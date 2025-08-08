@@ -4,8 +4,8 @@
 #SBATCH --output=logs/%x_%j.out         # Output file for stdout
 #SBATCH --error=logs/%x_%j.err          # Output file for stderr
 #SBATCH --ntasks=1                     # Number of tasks (cores)
-#SBATCH --cpus-per-task=40             # Number of cores per task
-#SBATCH --time=3-00:00:00              # Time limit hrs:min:sec
+#SBATCH --cpus-per-task=20             # Number of cores per task
+#SBATCH --time=24:00:00              # Time limit hrs:min:sec
 #SBATCH --account=project_2002833      # Project number
 #SBATCH --mem-per-cpu=2G               # Memory to reserve
 #SBATCH --partition=small              # Job queue (partition)
@@ -25,7 +25,7 @@ module load biopythontools
 module load biokit
 
 # Run OrthoFinder
-$ORTHOFINDER_CMD -f $PROTEOMES_DIR -t 40 -a 10
+$ORTHOFINDER_CMD -f $PROTEOMES_DIR -t 20 -a 5 -M msa -os
 
 echo "OrthoFinder run finished."
 echo "Results can be found in: $OUTPUT_DIR"
